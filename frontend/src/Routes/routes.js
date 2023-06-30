@@ -1,11 +1,11 @@
-import Login from '../Pages/login';
-import SignUp from '../Pages/signup';
+import LoginPage from '../Pages/LoginPage';
+import SignUp from '../Pages/SignUpPage';
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from '../utils/consts';
 
 export const publicRoutes = [
   {
     path: LOGIN_ROUTE,
-    Component: Login,
+    Component: LoginPage,
   },
   {
     path: SIGNUP_ROUTE,
