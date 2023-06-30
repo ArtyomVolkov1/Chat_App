@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 const Navbars = () => (
   <Navbar className="bg-body-tertiary">
     <Container>
-      <Navbar.Brand href="#home">Chat</Navbar.Brand>
+      <Navbar.Brand href="/">Chat</Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>
