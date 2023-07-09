@@ -1,7 +1,8 @@
 import LoginPage from '../Pages/LoginPage';
 import MainPage from '../Pages/MainPage';
-import SignUp from '../Pages/SignUpPage';
-import { LOGIN_ROUTE, SIGNUP_ROUTE, MAIN_ROUTE } from '../utils/consts';
+import ErrorPage from '../Pages/ErrorPage';
+// import SignUp from '../Pages/SignUpPage';
+import { GHOST_ROUTE, LOGIN_ROUTE, MAIN_ROUTE } from '../utils/consts';
 
 export const publicRoutes = [
   {
@@ -9,18 +10,18 @@ export const publicRoutes = [
     Component: LoginPage,
   },
   {
-    path: SIGNUP_ROUTE,
-    Component: SignUp,
+    path: GHOST_ROUTE,
+    Component: ErrorPage,
   },
+];
+
+export const authRoutes = [
   {
     path: MAIN_ROUTE,
     Component: MainPage,
   },
+  {
+    path: GHOST_ROUTE,
+    Component: ErrorPage,
+  },
 ];
-export const authRoutes = [];
-// export const authRoutes = [
-//     {
-//         path: CHAT_ROUTE,
-//         Component: Chat,
-//     }
-// ];

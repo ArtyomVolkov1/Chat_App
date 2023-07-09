@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
 import Chat from '../Components/Chat';
+// import Sidebar from '../Components/Sidebar';
 
 const MainPage = () => (
-  <div>
-    <Link to="/login">Start</Link>
+  <Container className="h-100 my-4 overflow-hidden rounded">
     <Chat />
-  </div>
+  </Container>
 );
 
 export default MainPage;
