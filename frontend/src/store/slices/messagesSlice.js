@@ -1,21 +1,24 @@
 /* eslint-disable */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 
-const initialState = {
-    messages: [],
-};
+const messagesAdapter = createEntityAdapter();
+const initialState = messagesAdapter.getInitialState();
 
 const messagesSlice = createSlice({
   name: 'messages',
   initialState,
   reducers: {
-    addMessage: (state, { payload }) => {
-        const { message } = payload;
-        state.messages.push(payload);
-      },
+    addMessage: messagesAdapter.addOne,
+    addMessages: messagesAdapter.addMany,
   },
 });
 
-export const { addMessage } = messagesSlice.actions;
+export const { addMessage, addMessages } = messagesSlice.actions;
+
+export const selectors = messagesAdapter.getSelectors((state) => state.messages);
+
+export const getMessages = (state) => {
+  return state.messages.ids.map((id) => state.messages.entities[id]);
+}
 
 export default messagesSlice.reducer;

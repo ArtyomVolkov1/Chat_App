@@ -1,28 +1,26 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 import axios from 'axios';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as yup from 'yup';
 import * as formik from 'formik';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
-// import useAuth from '../hooks';
-import { useDispatch } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 import routes from '../routes';
-import { logIn } from '../store/slices/userSlice';
 
 const LoginForm = () => {
   const { Formik } = formik;
-  const dispatch = useDispatch();
+  const [authFailed, setAuthFailed] = useState(false);
+  const auth = useAuth();
   const LoginSchema = yup.object().shape({
     username: yup.string().required(),
     password: yup.string().required(),
   });
-  // const [authFailed, setAuthFailde] = useState(false);
   const navigate = useNavigate();
-  // const location = useLocation();
+  const location = useLocation();
   const inputRef = useRef();
   useEffect(() => {
     inputRef.current.focus();
@@ -35,15 +33,16 @@ const LoginForm = () => {
       }}
       validationSchema={LoginSchema}
       onSubmit={async (values) => {
-        // setAuthFailde(false);
+        setAuthFailed(false);
         try {
           const responce = await axios.post(routes.loginPath(), values);
           localStorage.setItem('userId', JSON.stringify(responce.data));
-          dispatch(logIn(responce.data.token));
-          // dispatch(logIn(responce.data));
+          auth.logIn();
+          const { from } = location.state || { from: { pathname: '/' } };
+          navigate(from);
         } catch (errors) {
           if (errors.isAxiosError && errors.responce.status === 401) {
-            // setAuthFailde(true);
+            setAuthFailed(true);
             inputRef.current.select();
             return;
           }

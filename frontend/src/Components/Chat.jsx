@@ -1,40 +1,32 @@
+/* eslint-disable no-shadow */
 import React, { useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/esm/Button';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import useAuth from '../hooks/useAuth';
 import SendMessageForm from './SendMessageForm';
-import { fetchData } from '../store/slices/dataSlice';
-
-import routes from '../routes';
+// import routes from '../routes';
 import { addMessage } from '../store/slices/messagesSlice';
+import { addChannel, setChannelId } from '../store/slices/channelsSlice';
 import Body from './MessageList';
-
-const getAuthHeader = () => {
-  const userId = JSON.parse(localStorage.getItem('userId'));
-  if (userId) {
-    return { Authorization: `Bearer ${userId.token}` };
-  }
-  return {};
-};
+import fetchData from '../api/fetchData';
 
 const Chat = () => {
   const {
     channels, currentChannelId,
   } = useSelector((state) => state.data);
-  // const messageBody = useSelector((state) => state.data.messages.body);
   const dispatch = useDispatch();
+  const auth = useAuth();
   useEffect(() => {
-    const fetchingData = async () => {
-      const responce = await axios.get(routes.data(), { headers: getAuthHeader() });
-      localStorage.setItem('userData', JSON.stringify(responce.data));
-      dispatch(fetchData(responce.data));
-      dispatch(addMessage(responce.data.messages));
-    };
-    fetchingData();
-  }, [dispatch]);
+    fetchData(auth.getAuthHeader).then((data) => {
+      dispatch(addMessage(data));
+      dispatch(addChannel(data));
+      dispatch(setChannelId(data));
+    });
+  });
   return (
     <Row className="h-100 bg-white flex-md-row w-100">
       <div className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">

@@ -1,12 +1,47 @@
 /* eslint-disable react/function-component-definition */
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import AppRouter from './Components/AppRouter';
+import {
+  BrowserRouter, Routes, Route, Navigate,
+} from 'react-router-dom';
 import './App.css';
-import Navbars from './Components/Navbar';
 import ChatApiProvider from './contexts/ChatApiContext';
+import useAuth from './hooks/useAuth';
+import routes from './routes';
+import AuthProvider from './contexts/AuthContext';
+import Navbar from './Components/Navbar';
+import MainPage from './Pages/MainPage';
+import LoginPage from './Pages/LoginPage';
+import SignUpPage from './Pages/SignUpPage';
+import ErrorPage from './Pages/ErrorPage';
+
+const PrivateRoute = ({ children }) => {
+  const auth = useAuth();
+  return auth.loggedIn ? children : <Navigate to={routes.loginPage()} />;
+};
 
 const App = ({ socket }) => (
-  <BrowserRouter><div className="d-flex flex-column h-100 "><Navbars /><ChatApiProvider socket={socket}><AppRouter /></ChatApiProvider></div></BrowserRouter>
+  <AuthProvider>
+    <BrowserRouter>
+      <div className="d-flex flex-column h-100 ">
+        <Navbar />
+        <Routes>
+          <Route
+            path={routes.mainPage()}
+            element={(
+              <ChatApiProvider socket={socket}>
+                <PrivateRoute>
+                  <MainPage />
+                </PrivateRoute>
+              </ChatApiProvider>
+          )}
+          />
+          <Route path={routes.loginPage()} element={<LoginPage />} />
+          <Route path={routes.signUpPage()} element={<SignUpPage />} />
+          <Route path={routes.errorPage()} element={<ErrorPage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  </AuthProvider>
 );
+
 export default App;
