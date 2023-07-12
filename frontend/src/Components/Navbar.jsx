@@ -29,8 +29,6 @@ const Navbars = () => {
       <Container>
         <Navbar.Brand href='/'>Chat</Navbar.Brand>
         <Navbar.Toggle />
-        <Navbar.Collapse className="justify-content-end" />
-        <Button onClick={() => navigate('/login')}>False</Button>
       </Container>
     </Navbar>
   );

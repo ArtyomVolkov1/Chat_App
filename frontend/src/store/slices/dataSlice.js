@@ -4,7 +4,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   channels: [],
   messages: [],
-  channelId: null,
+  currentChannelId: null,
+  inputMessage: '',
 };
 
 const dataSlice = createSlice({
@@ -14,12 +15,15 @@ const dataSlice = createSlice({
     fetchData: (state, { payload }) => {
       state.channels = payload.channels;
       state.messages = payload.messages;
-      state.channelId = payload.currentChannelId;
+      state.currentChannelId = payload.currentChannelId;
+    },
+    changeInputMessage: (state, { payload }) => {
+      state.inputMessage = payload;
     },
   },
 });
 
 // eslint-disable-next-line no-empty-pattern
-export const { fetchData } = dataSlice.actions;
+export const { fetchData, changeInputMessage } = dataSlice.actions;
 
 export default dataSlice.reducer;
