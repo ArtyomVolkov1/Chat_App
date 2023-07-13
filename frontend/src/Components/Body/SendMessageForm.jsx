@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import * as formik from 'formik';
+import * as yup from 'yup';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useSelector } from 'react-redux';
-import useChatApi from '../hooks/useChatApi';
+import useChatApi from '../../hooks/useChatApi';
 
 const SendMessageForm = () => {
   const { Formik } = formik;
@@ -12,15 +13,18 @@ const SendMessageForm = () => {
   const inputRef = useRef(null);
   const { currentChannelId } = useSelector((state) => state.channelInfo);
   const { username } = JSON.parse(localStorage.getItem('userId'));
+  const validationSchema = yup.object().shape({
+    message: yup.string().trim().required('required'),
+  });
   useEffect(() => {
     inputRef.current.focus();
   }, []);
-
   return (
     <Formik
       initialValues={{
         message: '',
       }}
+      validationSchema={validationSchema}
       onSubmit={async ({ message }, { resetForm }) => {
         const data = {
           body: message,
@@ -34,27 +38,35 @@ const SendMessageForm = () => {
           console.log(err);
         }
       }}
+
     >
       {
         ({
           values, handleSubmit, handleChange,
         }) => (
-          <Form className="py-1 border rounded-2" onSubmit={handleSubmit}>
-            <InputGroup className="mb-3">
-              <Form.Control
-                onChange={handleChange}
-                placeholder="Введите ваше сообщение"
-                name="message"
-                value={values.message}
-                ref={inputRef}
-              />
-              <Button
-                type="submit"
-                variant="link"
-                className="btn-group-vertical text-dark"
-              />
-            </InputGroup>
-          </Form>
+          <div className="mt-auto px-5 py-3">
+            <div>
+              <Form noValidate className="py-1 border rounded-2" onSubmit={handleSubmit}>
+                <InputGroup>
+                  <Form.Control
+                    className="border-0 p-0 ps-2"
+                    onChange={handleChange}
+                    placeholder="Введите ваше сообщение..."
+                    name="message"
+                    value={values.message}
+                    ref={inputRef}
+                  />
+                  <Button
+                    type="submit"
+                    variant="link"
+                    className="btn-group-vertical text-dark"
+                  >
+                    Сказать
+                  </Button>
+                </InputGroup>
+              </Form>
+            </div>
+          </div>
         )
     }
 
