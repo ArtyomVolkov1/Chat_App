@@ -6,12 +6,13 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useSelector } from 'react-redux';
 import useChatApi from '../../hooks/useChatApi';
+import { getCurrentChannelId } from '../../store/slices/channelsSlice';
 
 const SendMessageForm = () => {
   const { Formik } = formik;
   const api = useChatApi();
   const inputRef = useRef(null);
-  const { currentChannelId } = useSelector((state) => state.channelInfo);
+  const currentChannelId = useSelector(getCurrentChannelId);
   const { username } = JSON.parse(localStorage.getItem('userId'));
   const validationSchema = yup.object().shape({
     message: yup.string().trim().required('required'),

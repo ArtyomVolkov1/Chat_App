@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getCurrentChannel } from '../../store/slices/channelsSlice';
+import { getCurrentChannel, getCurrentChannelId } from '../../store/slices/channelsSlice';
 import { getMessages } from '../../store/slices/messagesSlice';
 
 const Header = () => {
   const messages = useSelector(getMessages);
-  const { currentChannelId } = useSelector((state) => state.channelInfo);
+  const currentChannelId = useSelector(getCurrentChannelId);
   const currentChannelName = useSelector(getCurrentChannel);
   const count = messages.filter(({ channelId }) => channelId === currentChannelId);
   return (

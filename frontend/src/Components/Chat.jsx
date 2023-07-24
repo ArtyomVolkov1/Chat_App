@@ -7,14 +7,18 @@ import { addMessages } from '../store/slices/messagesSlice';
 import { addChannels, setChannelId } from '../store/slices/channelsSlice';
 import fetchData from '../api/fetchData';
 import Channels from './Sidebar/Channels';
-import { openModal } from '../store/slices/modalSlice';
+import { closeModal, openModal } from '../store/slices/modalSlice';
 import Messages from './Body/Messages';
+import Modal from './Modals';
 
 const Chat = () => {
   const dispatch = useDispatch();
   const auth = useAuth();
-  const handleOpen = (type, id = null) => {
+  const handleOpen = (type, id = null) => () => {
     dispatch(openModal({ type, id }));
+  };
+  const handleClose = () => {
+    dispatch(closeModal());
   };
   useEffect(() => {
     fetchData(auth.getAuthHeader).then((data) => {
@@ -30,6 +34,7 @@ const Chat = () => {
         <Channels handleOpen={handleOpen} />
         <Messages />
       </Row>
+      <Modal onHide={handleClose} />
     </Container>
   );
 };

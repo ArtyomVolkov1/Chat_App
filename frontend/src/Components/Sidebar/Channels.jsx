@@ -5,12 +5,12 @@ import {
   Col, Button, ButtonGroup, Dropdown,
 } from 'react-bootstrap';
 import cn from 'classnames';
-import { selectors, setChannelId } from '../../store/slices/channelsSlice';
+import { getCurrentChannelId, selectors, setChannelId } from '../../store/slices/channelsSlice';
 
 const Channels = ({ handleOpen }) => {
   const dispatch = useDispatch();
   const channels = useSelector(selectors.selectAll);
-  const { currentChannelId } = useSelector((state) => state.channelInfo);
+  const currentChannelId = useSelector(getCurrentChannelId);
   const handleRename = (id) => handleOpen('renaming', id);
   const handleRemove = (id) => handleOpen('removing', id);
   const channelsList = () => {
