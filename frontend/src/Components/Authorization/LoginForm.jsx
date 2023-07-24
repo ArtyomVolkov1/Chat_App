@@ -16,8 +16,8 @@ const LoginForm = () => {
   const [authFailed, setAuthFailed] = useState(false);
   const auth = useAuth();
   const LoginSchema = yup.object().shape({
-    username: yup.string().required(),
-    password: yup.string().required(),
+    username: yup.string().required('Это обязательное поле'),
+    password: yup.string().required('Это обязательное поле'),
   });
   const navigate = useNavigate();
   const location = useLocation();
