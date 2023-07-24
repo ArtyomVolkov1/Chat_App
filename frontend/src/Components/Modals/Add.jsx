@@ -61,10 +61,10 @@ const Add = ({ onHide }) => {
           />
           <Form.Label className="visually-hidden" htmlFor="name">Имя канала</Form.Label>
           <FormControl.Feedback type="invalid">{errors.name}</FormControl.Feedback>
-          <Modal.Footer>
+          <div className="d-flex justify-content-end">
             <Button variant="secondary" onClick={handleClose}>Закрыть</Button>
             <Button type="submit" variant="primary">Отправить</Button>
-          </Modal.Footer>
+          </div>
         </Form>
       </Modal.Body>
     </Modal>

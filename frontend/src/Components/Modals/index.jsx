@@ -5,11 +5,15 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Add from './Add';
 import { getModalType } from '../../store/slices/modalSlice';
+import Rename from './Rename';
+import Remove from './Remove';
 
 const ModalComponent = (props) => {
   const { type } = props;
   const modals = {
     adding: Add,
+    renaming: Rename,
+    removing: Remove,
   };
   const Component = modals[type];
   return (

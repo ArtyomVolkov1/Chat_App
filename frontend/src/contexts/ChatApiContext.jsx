@@ -46,7 +46,7 @@ const ChatApiProvider = ({ socket, children }) => {
     });
   };
 
-  const updateNameChannel = (id, name, cb) => {
+  const updateNameChannel = ({ id, name }, cb) => {
     socket.emit('renameChannel', { id, name }, (responce) => {
       const { status } = responce;
       if (status === 'ok') {

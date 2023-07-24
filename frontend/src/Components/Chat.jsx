@@ -9,7 +9,7 @@ import fetchData from '../api/fetchData';
 import Channels from './Sidebar/Channels';
 import { closeModal, openModal } from '../store/slices/modalSlice';
 import Messages from './Body/Messages';
-import Modal from './Modals';
+import Modal from './Modals/index';
 
 const Chat = () => {
   const dispatch = useDispatch();
