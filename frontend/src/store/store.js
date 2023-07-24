@@ -9,7 +9,7 @@ export default configureStore({
   reducer: {
     data: dataReducer,
     user: userReducer,
-    channelInfo: channelReducer,
+    channels: channelReducer,
     messages: messageReducer,
     modal: modalReducer,
   },

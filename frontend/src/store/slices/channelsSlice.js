@@ -10,7 +10,7 @@ const initialState = channelsAdapter.getInitialState(
 );
 
 const channelsSlice = createSlice({
-  name: 'channelInfo',
+  name: 'channels',
   initialState,
   reducers: {
     addChannel: channelsAdapter.addOne,
@@ -30,14 +30,15 @@ const channelsSlice = createSlice({
 
 export const { addChannel, addChannels, renameChannel, removeChannel, setChannelId, setDefaultChannelId  } = channelsSlice.actions;
 
-export const selectors = channelsAdapter.getSelectors((state) => state.channelInfo);
+export const selectors = channelsAdapter.getSelectors((state) => state.channels);
+
+export const getCurrentChannelId = (state) => state.channels.currentChannelId;
 
 export const getCurrentChannel = (state) => {
-  const { currentChannelId } = state.channelInfo;
-  return state.channelInfo.entities[currentChannelId]
+  const { currentChannelId } = state.channels;
+  return state.channels.entities[currentChannelId]
 };
 export const getChannelsNames = ({ channels }) =>
-  channels.ids
-    .map((id) => channels.entities[id].name);
+  channels.ids.map((id) => channels.entities[id].name);
 
 export default channelsSlice.reducer;
