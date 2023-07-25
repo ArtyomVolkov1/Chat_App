@@ -1,6 +1,5 @@
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-unused-vars */
-/* eslint-disable consistent-return */
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
 import * as yup from 'yup';
@@ -18,41 +17,45 @@ const SignUpForm = () => {
   const auth = useAuth();
   const navigate = useNavigate();
   const inputRef = useRef(null);
-  const signupSchema = yup.object().shape({
+  const validationSchema = yup.object().shape({
     username: yup.string().required('Это обязательное поле').min(3, 'От 3 до 20 символов').max(20, 'От 3 до 20 символов'),
     password: yup.string().required('Это обязательно поле').min(6, 'Не менее 6 символов'),
-    passwordConfirm: yup.string().required('Это обязательно поле').oneOf([yup.ref('password'), null]),
+    passwordConfirm: yup.string().required('Это обязательно поле').oneOf([yup.ref('password'), null], 'Пароли не совпали'),
   });
   useEffect(() => {
     inputRef.current.focus();
   }, []);
   const formik = useFormik({
+    validationSchema,
     initialValues: {
       username: '',
       password: '',
       passwordConfirm: '',
     },
-    signupSchema,
+    // eslint-disable-next-line consistent-return
     onSubmit: async (values) => {
-      setAuthFailed(false);
       try {
         const responce = await axios.post(routes.signUp(), values);
         localStorage.setItem('userId', JSON.stringify(responce.data));
         auth.logIn();
         navigate('/');
-      } catch (errors) {
-        if (errors.isAxiosError && errors.responce.status === 401) {
+      } catch (error) {
+        if (error.isAxiosError && error.responce.status === 401) {
           inputRef.current.select();
           setAuthFailed(true);
+
           return false;
         }
-        if (errors.isAxiosError && errors.responce.status === 409) {
+
+        if (error.isAxiosError && error.responce.status === 409) {
           inputRef.current.select();
           setAuthFailed(true);
           setFoundUser(true);
+
           return false;
         }
-        throw errors;
+
+        throw error;
       }
     },
   });
@@ -61,46 +64,52 @@ const SignUpForm = () => {
   } = formik;
   const onChange = (e) => {
     if (foundUser) {
-      setFoundUser(true);
+      setFoundUser(false);
     }
     handleChange(e);
   };
   return (
     <Form onSubmit={handleSubmit}>
-      <h1 className="mb-4 fs-2 text-center ">Регистрация</h1>
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="username">Username</Form.Label>
+      <h2 className="text-center mb-4">Регистрация</h2>
+      <Form.Group className="form-floating mb-3">
         <Form.Control
           id="username"
           name="username"
           onChange={onChange}
           value={values.username}
           type="text"
-          isInvalid={(touched.username && !!errors.username || foundUser) || authFailed}
+          isInvalid={
+            (touched.username && !!errors.username || foundUser)
+            || authFailed
+}
           ref={inputRef}
-          placeholder="Enter username"
         />
-        <Form.Control.Feedback type="invalid" tooltip>{ (foundUser ? 'Пользователь уже существует' : errors.username) }</Form.Control.Feedback>
+        <Form.Label htmlFor="username">Ваш ник</Form.Label>
+        {(foundUser || !!errors.username) && (
+        <Form.Control.Feedback type="invalid" tooltip>
+          {foundUser ? 'Пользователь уже есть' : errors.username}
+        </Form.Control.Feedback>
+        )}
       </Form.Group>
-      <Form.Group className="position-relative">
-        <Form.Label htmlFor="password">Password</Form.Label>
-        <Form.Control id="password" name="password" onChange={handleChange} value={values.password} type="password" isInvalid={(touched.password && !!errors.password) || authFailed} placeholder="Enter password" />
+      <Form.Group className="form-floating mb-4">
+        <Form.Control id="password" name="password" onChange={handleChange} value={values.password} type="password" isInvalid={(touched.password && !!errors.password) || authFailed} />
+        <Form.Label htmlFor="password">Пароль</Form.Label>
         {!!errors.password && (
           <Form.Control.Feedback type="invalid" tooltip>
             {errors.password}
           </Form.Control.Feedback>
         )}
       </Form.Group>
-      <Form.Group className="position-relative">
-        <Form.Label htmlFor="passwordConfirm">Confirm Password</Form.Label>
-        <Form.Control id="passwordConfirm" name="passwordConfirm" onChange={handleChange} value={values.passwordConfirm} type="passwordConfirm" isInvalid={(touched.passwordConfirm && !!errors.passwordConfirm) || authFailed} placeholder="Enter passwordConfirm" />
+      <Form.Group className="form-floating mb-4">
+        <Form.Control id="passwordConfirm" name="passwordConfirm" onChange={handleChange} value={values.passwordConfirm} type="password" isInvalid={(touched.passwordConfirm && !!errors.passwordConfirm) || authFailed} />
+        <Form.Label htmlFor="passwordConfirm">Подтвердите пароль</Form.Label>
         {!!errors.passwordConfirm && (
           <Form.Control.Feedback type="invalid" tooltip>
             {errors.passwordConfirm}
           </Form.Control.Feedback>
         )}
       </Form.Group>
-      <Button className="mb-2" variant="primary" type="submit">
+      <Button className="w-100 mb-3" variant="primary" type="submit">
         Войти
       </Button>
     </Form>
