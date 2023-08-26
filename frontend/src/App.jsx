@@ -3,6 +3,7 @@ import React from 'react';
 import {
   BrowserRouter, Routes, Route, Navigate,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import './App.css';
 import ChatApiProvider from './contexts/ChatApiContext';
 import useAuth from './hooks/useAuth';
@@ -41,6 +42,7 @@ const App = ({ socket }) => (
         </Routes>
       </div>
     </BrowserRouter>
+    <ToastContainer />
   </AuthProvider>
 );
 

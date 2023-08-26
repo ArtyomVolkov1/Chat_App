@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-shadow */
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import {
   Modal, Button, Form, FormControl,
@@ -12,6 +14,7 @@ import { selectors } from '../../store/slices/channelsSlice';
 import { getChannelId } from '../../store/slices/modalSlice';
 
 const Rename = ({ onHide }) => {
+  const { t } = useTranslation();
   const [show, setShow] = useState(true);
   const api = useChatApi();
   const inputRef = useRef(null);
@@ -20,6 +23,7 @@ const Rename = ({ onHide }) => {
   const channelsName = channels.map(({ name }) => name);
   const currentChannel = channels.find((channel) => channel.id === channelId);
   const { id, name } = currentChannel;
+  const notify = () => toast.success(t('notify.renameChannel'));
 
   const handleClose = () => {
     setShow(false);
@@ -27,13 +31,14 @@ const Rename = ({ onHide }) => {
   };
   const handleSucces = () => {
     handleClose();
+    notify();
   };
   const validationSchema = yup.object().shape({
     name: yup.string()
-      .required('Это обязательное поле')
-      .min(3, 'от 3 до 20 символов')
-      .max(20, 'от 3 до 20 символов')
-      .notOneOf(channelsName, 'С таким именем канал уже создан'),
+      .required(t('modal.required'))
+      .min(3, t('modal.minmax'))
+      .max(20, t('modal.minmax'))
+      .notOneOf(channelsName, t('modal.uniq')),
   });
   useEffect(() => {
     inputRef.current.select();
@@ -57,7 +62,7 @@ const Rename = ({ onHide }) => {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Переименовать канал ?</Modal.Title>
+        <Modal.Title>{t('modal.renameChannel')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
@@ -75,8 +80,8 @@ const Rename = ({ onHide }) => {
           <Form.Label className="visually-hidden" htmlFor="name">Имя канала</Form.Label>
           <FormControl.Feedback type="invalid">{errors.name}</FormControl.Feedback>
           <div className="d-flex justify-content-end">
-            <Button variant="secondary" onClick={handleClose}>Закрыть</Button>
-            <Button disabled={isSubmitting} type="submit" variant="primary">Отправить</Button>
+            <Button variant="secondary" onClick={handleClose}>{t('modal.cancel')}</Button>
+            <Button disabled={isSubmitting} type="submit" variant="primary">{t('modal.add')}</Button>
           </div>
         </Form>
       </Modal.Body>

@@ -5,9 +5,11 @@ import {
   Col, Button, ButtonGroup, Dropdown,
 } from 'react-bootstrap';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
 import { getCurrentChannelId, selectors, setChannelId } from '../../store/slices/channelsSlice';
 
 const Channels = ({ handleOpen }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const channels = useSelector(selectors.selectAll);
   const currentChannelId = useSelector(getCurrentChannelId);
@@ -56,8 +58,8 @@ const Channels = ({ handleOpen }) => {
                 <span className="visually-hidden">Управление каналом</span>
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item onClick={handleRemove(id)}>Удалить</Dropdown.Item>
-                <Dropdown.Item onClick={handleRename(id)}>Переименовать</Dropdown.Item>
+                <Dropdown.Item onClick={handleRemove(id)}>{t('channels.delete')}</Dropdown.Item>
+                <Dropdown.Item onClick={handleRename(id)}>{t('channels.rename')}</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>
@@ -71,7 +73,7 @@ const Channels = ({ handleOpen }) => {
   return (
     <Col className="col-4 col-md-2 border-end px-0 bg-light flex-column  d-flex">
       <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
-        <b>Каналы</b>
+        <b>{t('channels.channels')}</b>
         <Button
           onClick={handleAdd()}
           variant="link"

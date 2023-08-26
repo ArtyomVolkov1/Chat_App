@@ -5,10 +5,12 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import useChatApi from '../../hooks/useChatApi';
 import { getCurrentChannelId } from '../../store/slices/channelsSlice';
 
 const SendMessageForm = () => {
+  const { t } = useTranslation();
   const { Formik } = formik;
   const api = useChatApi();
   const inputRef = useRef(null);
@@ -39,38 +41,36 @@ const SendMessageForm = () => {
           console.log(err);
         }
       }}
-
     >
-      {
-        ({
-          values, handleSubmit, handleChange,
-        }) => (
-          <div className="mt-auto px-5 py-3">
-            <div>
-              <Form noValidate className="py-1 border rounded-2" onSubmit={handleSubmit}>
-                <InputGroup>
-                  <Form.Control
-                    className="border-0 p-0 ps-2"
-                    onChange={handleChange}
-                    placeholder="Введите ваше сообщение..."
-                    name="message"
-                    value={values.message}
-                    ref={inputRef}
-                  />
-                  <Button
-                    type="submit"
-                    variant="link"
-                    className="btn-group-vertical text-dark"
-                  >
-                    Сказать
-                  </Button>
-                </InputGroup>
-              </Form>
-            </div>
+      {({ values, handleSubmit, handleChange }) => (
+        <div className="mt-auto px-5 py-3">
+          <div>
+            <Form
+              noValidate
+              className="py-1 border rounded-2"
+              onSubmit={handleSubmit}
+            >
+              <InputGroup>
+                <Form.Control
+                  className="border-0 p-0 ps-2"
+                  onChange={handleChange}
+                  placeholder="Введите ваше сообщение..."
+                  name="message"
+                  value={values.message}
+                  ref={inputRef}
+                />
+                <Button
+                  type="submit"
+                  variant="link"
+                  className="btn-group-vertical text-dark"
+                >
+                  {t('message.sayHi')}
+                </Button>
+              </InputGroup>
+            </Form>
           </div>
-        )
-    }
-
+        </div>
+      )}
     </Formik>
   );
 };

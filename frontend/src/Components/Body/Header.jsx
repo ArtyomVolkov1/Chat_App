@@ -1,9 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { getCurrentChannel, getCurrentChannelId } from '../../store/slices/channelsSlice';
 import { getMessages } from '../../store/slices/messagesSlice';
 
 const Header = () => {
+  const { t } = useTranslation();
   const messages = useSelector(getMessages);
   const currentChannelId = useSelector(getCurrentChannelId);
   const currentChannelName = useSelector(getCurrentChannel);
@@ -16,7 +18,7 @@ const Header = () => {
       <span className="text-muted">
         {' '}
         {count.length}
-        {' '}сообщений
+        {' '}{t('message.messages')}
       </span>
     </div>
   );
