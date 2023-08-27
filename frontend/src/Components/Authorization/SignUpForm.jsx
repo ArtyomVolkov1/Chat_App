@@ -23,8 +23,8 @@ const SignUpForm = () => {
     username: yup
       .string()
       .required(t('registration.required'))
-      .min(3, t('registration.minmax'))
-      .max(20, t('registration.minmax')),
+      .min(3, t('registration.minMax'))
+      .max(20, t('registration.minMax')),
     password: yup
       .string()
       .required(t('registration.required'))
@@ -45,12 +45,13 @@ const SignUpForm = () => {
       passwordConfirm: '',
     },
     // eslint-disable-next-line consistent-return
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setSubmitting }) => {
       try {
         const authResponse = await axios.post(routes.signUp(), values);
         localStorage.setItem('userId', JSON.stringify(authResponse.data));
         auth.logIn();
         navigate('/');
+        setSubmitting(false);
       } catch (error) {
         if (error.isAxiosError && error.response.status === 401) {
           inputRef.current.select();
@@ -72,7 +73,7 @@ const SignUpForm = () => {
     },
   });
   const {
-    touched, handleSubmit, handleChange, values, errors,
+    touched, handleSubmit, handleChange, values, errors, isSubmitting,
   } = formik;
   const onChange = (e) => {
     if (existingUser) {
@@ -138,7 +139,7 @@ const SignUpForm = () => {
           </Form.Control.Feedback>
         )}
       </Form.Group>
-      <Button className="w-100 mb-3" variant="primary" type="submit">
+      <Button disabled={isSubmitting} className="w-100 mb-3" variant="primary" type="submit">
         {t('registration.enter')}
       </Button>
     </Form>
