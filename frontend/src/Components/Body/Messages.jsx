@@ -8,7 +8,6 @@ import { getMessages } from '../../store/slices/messagesSlice';
 
 const Messages = () => {
   const messages = useSelector(getMessages);
-  console.log(messages);
   const currentChannelId = useSelector(getCurrentChannelId);
   const channelMessages = messages.filter(
     ({ channelId }) => channelId === currentChannelId,

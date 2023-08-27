@@ -22,7 +22,7 @@ const SendMessageForm = () => {
   });
   useEffect(() => {
     inputRef.current.focus();
-  }, []);
+  }, [Formik]);
   return (
     <Formik
       initialValues={{
@@ -40,20 +40,21 @@ const SendMessageForm = () => {
         resetForm();
       }}
     >
-      {({ values, handleSubmit, handleChange }) => (
+      {({
+        values, handleSubmit, handleChange, isValid, dirty,
+      }) => (
         <div className="mt-auto px-5 py-3">
           <div>
             <Form
-              noValidate
               className="py-1 border rounded-2"
               onSubmit={handleSubmit}
             >
-              <InputGroup>
+              <InputGroup hasValidation>
                 <Form.Control
                   className="border-0 p-0 ps-2"
-                  onChange={handleChange}
                   placeholder="Введите ваше сообщение..."
                   name="message"
+                  onChange={handleChange}
                   value={values.message}
                   ref={inputRef}
                 />
@@ -61,6 +62,7 @@ const SendMessageForm = () => {
                   type="submit"
                   variant="link"
                   className="btn-group-vertical text-dark"
+                  disabled={(!isValid || !dirty)}
                 >
                   {t('message.sayHi')}
                 </Button>
