@@ -14,15 +14,15 @@ const ru = {
     },
     registration: {
       registration: 'Регистрация',
-      name: 'Ваш ник',
+      name: 'Имя пользователя',
       password: 'Пароль',
       confirmPassword: 'Подтвердите пароль',
       required: 'Это обязательное поле',
       minMax: 'От 3 до 20 символов',
       passwordLenght: 'Не менее 6 символов',
-      passwordError: 'Пароли не совпали',
+      passwordError: 'Пароли должны совпадать',
       exist: 'Пользователь уже есть',
-      enter: 'Войти',
+      enter: 'Зарегистрироваться',
     },
     notFoundPage: {
       notFound: 'Страница не найдена',
@@ -51,7 +51,7 @@ const ru = {
       required: 'Это обязательное поле',
     },
     notify: {
-      addChannel: 'Канал создан!',
+      addChannel: 'Канал создан',
       deleteChannel: 'Канал удален',
       renameChannel: 'Канал переименован',
     },
