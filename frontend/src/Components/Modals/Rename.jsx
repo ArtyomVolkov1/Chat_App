@@ -80,7 +80,7 @@ const Rename = ({ onHide }) => {
           <Form.Label className="visually-hidden" htmlFor="name">Имя канала</Form.Label>
           <FormControl.Feedback type="invalid">{errors.name}</FormControl.Feedback>
           <div className="d-flex justify-content-end">
-            <Button variant="secondary" onClick={handleClose}>{t('modal.cancel')}</Button>
+            <Button className="me-2" variant="secondary" onClick={handleClose}>{t('modal.cancel')}</Button>
             <Button disabled={isSubmitting} type="submit" variant="primary">{t('modal.add')}</Button>
           </div>
         </Form>

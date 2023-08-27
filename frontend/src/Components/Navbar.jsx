@@ -11,19 +11,17 @@ const Navbars = () => {
   const { t } = useTranslation();
   const auth = useAuth();
   return auth.loggedIn ? (
-    <Navbar className="bg-body-tertiary shadow-sm navbar navbar-expand-lg navbar-light bg-white">
+    <Navbar bg="white" expand="lg" className="shadow-sm">
       <Container>
         <Navbar.Brand href='/'>{t('nav.logo')}</Navbar.Brand>
-        <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end" />
         <Button onClick={auth.logOut}>{t('nav.exit')}</Button>
       </Container>
     </Navbar>
   ) : (
-    <Navbar className="bg-body-tertiary">
+    <Navbar bg="white" expand="lg" className="shadow-sm">
       <Container>
         <Navbar.Brand href='/'>{t('nav.logo')}</Navbar.Brand>
-        <Navbar.Toggle />
       </Container>
     </Navbar>
   );

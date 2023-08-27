@@ -1,7 +1,7 @@
 const ru = {
   translation: {
     nav: {
-      logo: 'Chat',
+      logo: 'Hexlet Chat',
       exit: 'Выйти',
     },
     login: {
@@ -9,7 +9,7 @@ const ru = {
       name: 'Ваш ник',
       password: 'Пароль',
       required: 'Это обязательное поле',
-      notFoundAcc: 'Неверный ник или пароль',
+      notFoundAcc: 'Неверные имя пользователя или пароль',
       notAcc: 'Нет аккаунта?',
     },
     registration: {

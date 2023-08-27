@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import * as formik from 'formik';
 import * as yup from 'yup';
+import filter from 'leo-profanity';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -28,18 +29,15 @@ const SendMessageForm = () => {
         message: '',
       }}
       validationSchema={validationSchema}
-      onSubmit={async ({ message }, { resetForm }) => {
+      onSubmit={({ message }, { resetForm }) => {
+        const filterMessage = filter.clean(message);
         const data = {
-          body: message,
+          body: filterMessage,
           channelId: currentChannelId,
           username,
         };
-        try {
-          await api.sendMessage(data);
-          resetForm();
-        } catch (err) {
-          console.log(err);
-        }
+        api.sendMessage(data);
+        resetForm();
       }}
     >
       {({ values, handleSubmit, handleChange }) => (

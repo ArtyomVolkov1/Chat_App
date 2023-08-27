@@ -26,8 +26,6 @@ export const { addMessage, addMessages } = messagesSlice.actions;
 
 export const selectors = messagesAdapter.getSelectors((state) => state.messages);
 
-export const getMessages = (state) => {
-  return state.messages.ids.map((id) => state.messages.entities[id]);
-}
+export const getMessages = (state) => state.messages.ids.map((id) => state.messages.entities[id]);
 
 export default messagesSlice.reducer;

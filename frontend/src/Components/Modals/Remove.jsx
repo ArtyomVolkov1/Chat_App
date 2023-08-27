@@ -33,7 +33,7 @@ const Remove = ({ onHide }) => {
       <Modal.Body>
         <p className="lead">{t('modal.uSure')}</p>
         <div className="d-flex justify-content-end">
-          <Button variant="secondary" onClick={handleClose}>{t('modal.cancel')}</Button>
+          <Button className="me-2" variant="secondary" onClick={handleClose}>{t('modal.cancel')}</Button>
           <Button type="submit" onClick={handleDelete} variant="danger">{t('modal.delete')}</Button>
         </div>
       </Modal.Body>

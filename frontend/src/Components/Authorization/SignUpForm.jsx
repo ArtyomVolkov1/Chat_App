@@ -7,6 +7,7 @@ import { Form, Button, InputGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
+import { useRollbar } from '@rollbar/react';
 import useAuth from '../../hooks/useAuth';
 import routes from '../../routes';
 
@@ -14,6 +15,7 @@ const SignUpForm = () => {
   const { t } = useTranslation();
   const [authFailed, setAuthFailed] = useState(false);
   const [existingUser, setExistingUser] = useState(false);
+  const rollbar = useRollbar();
   const auth = useAuth();
   const navigate = useNavigate();
   const inputRef = useRef(null);
@@ -53,7 +55,7 @@ const SignUpForm = () => {
         if (error.isAxiosError && error.response.status === 401) {
           inputRef.current.select();
           setAuthFailed(true);
-
+          rollbar.error(error);
           return false;
         }
 
@@ -61,7 +63,7 @@ const SignUpForm = () => {
           inputRef.current.select();
           setAuthFailed(true);
           setExistingUser(true);
-
+          rollbar.error(error);
           return false;
         }
 

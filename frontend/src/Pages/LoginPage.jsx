@@ -9,11 +9,11 @@ const LoginPage = () => {
   return (
     <Container fluid className="h-100">
       <Row className="justify-content-center align-items-center h100">
-        <Card style={{ width: '18rem' }} className="text-center">
-          <Card.Body>
+        <Card style={{ width: '18rem' }} className="text-center shadow-sm">
+          <Card.Body className="row">
             <LoginForm />
           </Card.Body>
-          <Card.Footer className="text-muted p-4">
+          <Card.Footer className="row text-muted p-4">
             <div className="text-center">
               <span className="px-1">{t('login.notAcc')}</span>
               <Link to="/signup">{t('registration.registration')}</Link>
