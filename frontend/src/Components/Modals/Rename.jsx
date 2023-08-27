@@ -36,8 +36,8 @@ const Rename = ({ onHide }) => {
   const validationSchema = yup.object().shape({
     name: yup.string()
       .required(t('modal.required'))
-      .min(3, t('modal.minmax'))
-      .max(20, t('modal.minmax'))
+      .min(3, t('modal.minMax'))
+      .max(20, t('modal.minMax'))
       .notOneOf(channelsName, t('modal.uniq')),
   });
   useEffect(() => {
