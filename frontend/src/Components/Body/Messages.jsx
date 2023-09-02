@@ -4,7 +4,7 @@ import Body from './MessageList';
 import SendMessageForm from './SendMessageForm';
 import Header from './Header';
 import { getCurrentChannelId } from '../../store/slices/channelsSlice';
-import { getMessages } from '../../store/slices/messagesSlice';
+import { getMessages } from '../../store/selectors';
 
 const Messages = () => {
   const messages = useSelector(getMessages);

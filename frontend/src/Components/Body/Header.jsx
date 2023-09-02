@@ -1,15 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { getCurrentChannel, getCurrentChannelId } from '../../store/slices/channelsSlice';
-import { getMessages } from '../../store/slices/messagesSlice';
+import { getCurrentChannel } from '../../store/slices/channelsSlice';
+import { getMessagesForCurrentChannel } from '../../store/selectors';
 
 const Header = () => {
   const { t } = useTranslation();
-  const messages = useSelector(getMessages);
-  const currentChannelId = useSelector(getCurrentChannelId);
   const currentChannelName = useSelector(getCurrentChannel);
-  const count = messages.filter(({ channelId }) => channelId === currentChannelId);
+  const count = useSelector(getMessagesForCurrentChannel);
   return (
     <div className="bg-light mb-4 p-3 shadow-sm small">
       <p className="m-0">

@@ -10,6 +10,14 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem('userId');
     setLoggedIn(false);
   };
+  const getUser = () => {
+    const userData = JSON.parse(localStorage.getItem('userId'));
+    return userData.username;
+  };
+  const setUserData = (responce) => {
+    const setData = localStorage.setItem('userId', JSON.stringify(responce.data));
+    return setData;
+  };
   const getAuthHeader = () => {
     const userData = JSON.parse(localStorage.getItem('userId'));
 
@@ -18,11 +26,10 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        loggedIn, logIn, logOut, getAuthHeader,
+        loggedIn, logIn, logOut, getAuthHeader, getUser, setUserData,
       }}
     >{children}
     </AuthContext.Provider>
   );
 };
-
 export default AuthProvider;

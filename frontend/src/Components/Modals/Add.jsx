@@ -8,7 +8,7 @@ import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import useChatApi from '../../hooks/useChatApi';
-import { getChannelsNames } from '../../store/slices/channelsSlice';
+import { getChannelsNames } from '../../store/selectors';
 
 const Add = ({ onHide }) => {
   const { t } = useTranslation();

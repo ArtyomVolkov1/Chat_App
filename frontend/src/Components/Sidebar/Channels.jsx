@@ -6,12 +6,12 @@ import {
 } from 'react-bootstrap';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { getCurrentChannelId, selectors, setChannelId } from '../../store/slices/channelsSlice';
+import { getCurrentChannelId, selectAllChannels, setChannelId } from '../../store/slices/channelsSlice';
 
 const Channels = ({ handleOpen }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const channels = useSelector(selectors.selectAll);
+  const channels = useSelector(selectAllChannels);
   const currentChannelId = useSelector(getCurrentChannelId);
   const handleRename = (id) => handleOpen('renaming', id);
   const handleRemove = (id) => handleOpen('removing', id);
