@@ -52,7 +52,7 @@ const ru = {
     },
     notify: {
       addChannel: 'Канал создан',
-      deleteChannel: 'Канал удален',
+      deleteChannel: 'Канал удалён',
       renameChannel: 'Канал переименован',
     },
     errors: {
