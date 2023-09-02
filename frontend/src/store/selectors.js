@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-// import { createSelector } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
 
 const channelSelector = (state) => state.channels;

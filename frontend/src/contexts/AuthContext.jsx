@@ -28,7 +28,8 @@ const AuthProvider = ({ children }) => {
       value={{
         loggedIn, logIn, logOut, getAuthHeader, getUser, setUserData,
       }}
-    >{children}
+    >
+      {children}
     </AuthContext.Provider>
   );
 };

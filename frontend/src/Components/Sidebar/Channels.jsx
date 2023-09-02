@@ -48,7 +48,9 @@ const Channels = ({ handleOpen }) => {
                   dispatch(setChannelId(id));
                 }}
               >
-                #{' '}{name}
+                #
+                {' '}
+                {name}
               </Button>
               <Dropdown.Toggle
                 split
@@ -78,7 +80,8 @@ const Channels = ({ handleOpen }) => {
           onClick={handleAdd()}
           variant="link"
           className="p-0 text-primary btn-group-vertical"
-        >+
+        >
+          +
         </Button>
       </div>
       <ul className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">

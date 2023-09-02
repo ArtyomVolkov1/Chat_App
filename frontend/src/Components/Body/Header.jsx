@@ -11,12 +11,16 @@ const Header = () => {
   return (
     <div className="bg-light mb-4 p-3 shadow-sm small">
       <p className="m-0">
-        <b>#{' '}{currentChannelName?.name}</b>
+        <b>#
+          {' '}
+          {currentChannelName?.name}
+        </b>
       </p>
       <span className="text-muted">
         {' '}
         {count.length}
-        {' '}{t('message.messages')}
+        {' '}
+        {t('message.messages')}
       </span>
     </div>
   );

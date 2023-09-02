@@ -11,7 +11,8 @@ const MessageList = ({ messages }) => {
   return messages.map(({ username, body, id }) => (
     <div key={id} className="text-break mb-2" ref={messageRef}>
       <b>{username}</b>
-      {': '} {body}
+      {': '}
+      {body}
     </div>
   ));
 };
