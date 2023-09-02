@@ -48,7 +48,7 @@ const SignUpForm = () => {
     onSubmit: async (values, { setSubmitting }) => {
       try {
         const authResponse = await axios.post(routes.signUp(), values);
-        localStorage.setItem('userId', JSON.stringify(authResponse.data));
+        auth.setUserData(authResponse);
         auth.logIn();
         navigate('/');
         setSubmitting(false);

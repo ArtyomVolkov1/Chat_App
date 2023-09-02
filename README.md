@@ -2,7 +2,7 @@
 [![Actions Status](https://github.com/ArtyomVolkov1/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/ArtyomVolkov1/frontend-project-12/actions)
 
 ## Description
-Chat is a simplified analogue of Slack chat -  a real-time React/Redux application using AJAX, REST, websockets, React Hooks + Redux Toolkit + Formik    
+Chat is a simplified analogue of Slack chat -  a real-time React/Redux application using AJAX, REST, websockets, React Hooks + Redux Toolkit + Formik 
 
 ## Setup
 ```bash
@@ -12,5 +12,3 @@ $ make install
 $ npm run build
 $ make start
 ```
-## Preview
-frontend-project-12-production-e994.up.railway.app

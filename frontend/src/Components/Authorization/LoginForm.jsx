@@ -36,7 +36,7 @@ const LoginForm = () => {
     onSubmit: async (values) => {
       try {
         const response = await axios.post(routes.loginPath(), values);
-        localStorage.setItem('userId', JSON.stringify(response.data));
+        auth.setUserData(response);
         auth.logIn();
         const { from } = location.state || { from: { pathname: '/' } };
         navigate(from);
