@@ -7,14 +7,16 @@ import Form from 'react-bootstrap/Form';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import useChatApi from '../../hooks/useChatApi';
+import useAuth from '../../hooks/useAuth';
 import { getCurrentChannelId } from '../../store/slices/channelsSlice';
 
 const SendMessageForm = () => {
   const { t } = useTranslation();
   const api = useChatApi();
+  const auth = useAuth();
   const inputRef = useRef(null);
   const currentChannelId = useSelector(getCurrentChannelId);
-  const { username } = JSON.parse(localStorage.getItem('userId'));
+  const username = auth.getUser();
   const formik = useFormik({
     initialValues: { message: '' },
     onSubmit: ({ message }, { resetForm }) => {
