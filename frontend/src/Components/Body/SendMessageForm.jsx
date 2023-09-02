@@ -52,6 +52,7 @@ const SendMessageForm = () => {
             <Form.Control
               className="border-0 p-0 ps-2"
               placeholder="Введите ваше сообщение..."
+              aria-label="Новое сообщение"
               name="message"
               onChange={handleChange}
               value={values.message}
