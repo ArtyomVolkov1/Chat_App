@@ -12,4 +12,3 @@ $ make install
 $ npm run build
 $ make start
 ```
-## Preview
