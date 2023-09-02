@@ -10,18 +10,15 @@ import {
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import useChatApi from '../../hooks/useChatApi';
-import { selectors } from '../../store/slices/channelsSlice';
-import { getChannelId } from '../../store/slices/modalSlice';
+import { getCurrentChannel, getChannelsNames } from '../../store/selectors';
 
 const Rename = ({ onHide }) => {
   const { t } = useTranslation();
   const [show, setShow] = useState(true);
   const api = useChatApi();
   const inputRef = useRef(null);
-  const channels = useSelector(selectors.selectAll);
-  const channelId = useSelector(getChannelId);
-  const channelsName = channels.map(({ name }) => name);
-  const currentChannel = channels.find((channel) => channel.id === channelId);
+  const channelsName = useSelector(getChannelsNames);
+  const currentChannel = useSelector(getCurrentChannel);
   const { id, name } = currentChannel;
   const notify = () => toast.success(t('notify.renameChannel'));
 
