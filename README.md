@@ -12,5 +12,3 @@ $ make install
 $ npm run build
 $ make start
 ```
-## Preview
-frontend-project-12-production-e994.up.railway.app
