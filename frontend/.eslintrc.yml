@@ -21,17 +21,24 @@ plugins:
 rules:
   import/extensions: 0
   import/no-unresolved: 0
+  no-mixed-operators: off
+  consistent-return: off
   import/no-extraneous-dependencies: 0
   react/prop-types: 0
   no-console: 0
+  max-len: 0
   react/react-in-jsx-scope: 0
   react/jsx-one-expression-per-line: 0
+  react/jsx-no-useless-fragment: 0
   functional/no-conditional-statements: 0
   functional/no-expression-statements: 0
   functional/immutable-data: 0
   functional/functional-parameters: 0
   functional/no-try-statement: 0
   functional/no-throw-statement: 0
+  no-shadow: off
+  react/jsx-no-constructed-context-values: off
+  react/jsx-props-no-spreading: off
   no-underscore-dangle: [2, { 'allow': ["__filename", "__dirname"] }]
   react/function-component-definition: [2, { "namedComponents": "arrow-function" }]
   testing-library/no-debug: 0
