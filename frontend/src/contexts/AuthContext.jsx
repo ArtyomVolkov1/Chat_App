@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
 import React, { createContext, useState } from 'react';
 
 export const AuthContext = createContext(null);
@@ -10,13 +9,14 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem('userId');
     setLoggedIn(false);
   };
-  const getUser = () => {
-    const userData = JSON.parse(localStorage.getItem('userId'));
-    return userData.username;
-  };
   const setUserData = (responce) => {
     const setData = localStorage.setItem('userId', JSON.stringify(responce.data));
     return setData;
+  };
+
+  const getUser = () => {
+    const userData = JSON.parse(localStorage.getItem('userId'));
+    return userData.username;
   };
   const getAuthHeader = () => {
     const userData = JSON.parse(localStorage.getItem('userId'));

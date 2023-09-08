@@ -1,6 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import * as yup from 'yup';
@@ -32,11 +29,10 @@ const LoginForm = () => {
       username: '',
       password: '',
     },
-    // eslint-disable-next-line consistent-return
     onSubmit: async (values) => {
       try {
         const response = await axios.post(routes.loginPath(), values);
-        localStorage.setItem('userId', JSON.stringify(response.data));
+        auth.setUserData(response);
         auth.logIn();
         const { from } = location.state || { from: { pathname: '/' } };
         navigate(from);

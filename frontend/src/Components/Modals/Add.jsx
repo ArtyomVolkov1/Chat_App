@@ -64,7 +64,7 @@ const Add = ({ onHide }) => {
             ref={inputRef}
             isInvalid={touched.name && !!errors.name}
           />
-          <Form.Label className="visually-hidden" htmlFor="name">Имя канала</Form.Label>
+          <Form.Label className="visually-hidden" htmlFor="name">{t('modal.modalName')}</Form.Label>
           <FormControl.Feedback type="invalid">{errors.name}</FormControl.Feedback>
           <div className="d-flex justify-content-end">
             <Button className="me-2" variant="secondary" onClick={handleClose}>{t('modal.cancel')}</Button>

@@ -3,15 +3,10 @@ import { useSelector } from 'react-redux';
 import Body from './MessageList';
 import SendMessageForm from './SendMessageForm';
 import Header from './Header';
-import { getCurrentChannelId } from '../../store/slices/channelsSlice';
-import { getMessages } from '../../store/selectors';
+import { getMessagesForCurrentChannel } from '../../store/selectors';
 
 const Messages = () => {
-  const messages = useSelector(getMessages);
-  const currentChannelId = useSelector(getCurrentChannelId);
-  const channelMessages = messages.filter(
-    ({ channelId }) => channelId === currentChannelId,
-  );
+  const channelMessages = useSelector(getMessagesForCurrentChannel);
   return (
     <div className="col p-0 h-100">
       <div className="d-flex flex-column h-100">

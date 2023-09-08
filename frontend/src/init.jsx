@@ -3,7 +3,7 @@ import i18next from 'i18next';
 import filter from 'leo-profanity';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
-import { Provider as ProviderRollBar, ErrorBoundary } from '@rollbar/react'; // Provider imports 'rollbar'
+import { Provider as ProviderRollBar, ErrorBoundary } from '@rollbar/react';
 import store from './store/store';
 import App from './App';
 import ru from './locales/ru';

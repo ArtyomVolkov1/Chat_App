@@ -30,6 +30,7 @@ const ru = {
       teleport: 'на главную страницу',
     },
     channels: {
+      channelManagment: 'Управление каналом',
       channels: 'Каналы',
       delete: 'Удалить',
       rename: 'Переименовать',
@@ -39,6 +40,7 @@ const ru = {
       sayHi: 'Сказать',
     },
     modal: {
+      modalName: 'Имя канала',
       addChannel: 'Добавить канал',
       cancel: 'Отменить',
       add: 'Отправить',
@@ -46,7 +48,7 @@ const ru = {
       uSure: 'Уверены?',
       delete: 'Удалить',
       renameChannel: 'Переименовать канал',
-      uniq: 'С таким именем канал уже создан',
+      uniq: 'C таким именем канал уже создан',
       minMax: 'От 3 до 20 символов',
       required: 'Это обязательное поле',
     },

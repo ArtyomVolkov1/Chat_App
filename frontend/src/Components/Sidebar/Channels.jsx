@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -57,7 +56,7 @@ const Channels = ({ handleOpen }) => {
                 variant={variant}
                 className="flex-grow-0 text-end"
               >
-                <span className="visually-hidden">Управление каналом</span>
+                <span className="visually-hidden">{t('channels.channelManagment')}</span>
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item onClick={handleRemove(id)}>{t('channels.delete')}</Dropdown.Item>

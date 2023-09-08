@@ -1,4 +1,3 @@
-/* eslint-disable comma-dangle */
 import React from 'react';
 import { io } from 'socket.io-client';
 import ReactDOM from 'react-dom/client';

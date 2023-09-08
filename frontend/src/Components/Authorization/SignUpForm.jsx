@@ -1,9 +1,7 @@
-/* eslint-disable no-mixed-operators */
-/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
 import * as yup from 'yup';
-import { Form, Button, InputGroup } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
@@ -44,11 +42,10 @@ const SignUpForm = () => {
       password: '',
       passwordConfirm: '',
     },
-    // eslint-disable-next-line consistent-return
     onSubmit: async (values, { setSubmitting }) => {
       try {
         const authResponse = await axios.post(routes.signUp(), values);
-        localStorage.setItem('userId', JSON.stringify(authResponse.data));
+        auth.setUserData(authResponse);
         auth.logIn();
         navigate('/');
         setSubmitting(false);

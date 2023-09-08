@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
 import React, { createContext, useEffect } from 'react';
 import { addMessage } from '../store/slices/messagesSlice';
 import store from '../store/store';
