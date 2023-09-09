@@ -29,6 +29,7 @@ const LoginForm = () => {
       username: '',
       password: '',
     },
+    // eslint-disable-next-line consistent-return
     onSubmit: async (values) => {
       try {
         const response = await axios.post(routes.loginPath(), values);

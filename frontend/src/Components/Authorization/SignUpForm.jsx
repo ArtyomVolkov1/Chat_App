@@ -42,6 +42,7 @@ const SignUpForm = () => {
       password: '',
       passwordConfirm: '',
     },
+    // eslint-disable-next-line consistent-return
     onSubmit: async (values, { setSubmitting }) => {
       try {
         const authResponse = await axios.post(routes.signUp(), values);

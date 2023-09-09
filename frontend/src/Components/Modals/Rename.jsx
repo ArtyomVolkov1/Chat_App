@@ -43,6 +43,7 @@ const Rename = ({ onHide }) => {
       name,
     },
     validationSchema,
+    // eslint-disable-next-line no-shadow
     onSubmit: ({ name }, { setSubmitting }) => {
       setTimeout(() => {
         api.updateNameChannel({ id, name }, handleSucces);
