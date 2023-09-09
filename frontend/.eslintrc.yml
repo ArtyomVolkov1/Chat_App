@@ -25,8 +25,8 @@ rules:
   import/no-extraneous-dependencies: 0
   react/prop-types: 0
   no-console: 0
-  consistent-return: 'off'
-  max-len: 'off'
+  consistent-return: 0
+  max-len: 0
   react/react-in-jsx-scope: 0
   react/jsx-one-expression-per-line: 0
   react/jsx-no-useless-fragment: 0
@@ -36,7 +36,7 @@ rules:
   functional/functional-parameters: 0
   functional/no-try-statement: 0
   functional/no-throw-statement: 0
-  no-shadow: 'off'
+  no-shadow: 0
   react/jsx-no-constructed-context-values: 0
   react/jsx-props-no-spreading: 0
   no-underscore-dangle: [2, { 'allow': ["__filename", "__dirname"] }]
