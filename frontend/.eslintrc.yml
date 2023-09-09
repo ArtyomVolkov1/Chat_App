@@ -22,10 +22,10 @@ rules:
   import/extensions: 0
   import/no-unresolved: 0
   no-mixed-operators: 0
-  consistent-return: 'off'
   import/no-extraneous-dependencies: 0
   react/prop-types: 0
   no-console: 0
+  consistent-return: 'off'
   max-len: 'off'
   react/react-in-jsx-scope: 0
   react/jsx-one-expression-per-line: 0
