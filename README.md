@@ -13,4 +13,4 @@ $ npm run build
 $ make start
 ```
 ## Preview
-[Chat](https://frontend-project-12-qyp1.onrender.com)
+Click to go [Chat](https://frontend-project-12-qyp1.onrender.com)
